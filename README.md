@@ -17,6 +17,7 @@ As the project uses Jest, I realized that I could leave it in charge of mocking 
 - mobx and mobx-react: npm i mobx mobx-react --save-dev
 - jest
 - @types/jest: npm install --save @types/jest
+- http://jsonplaceholder.typicode.com
 
 #### Basic Folder Structure Before
 
@@ -89,3 +90,81 @@ class AlbumStore {
 
 export default AlbumStore;
 ```
+
+## Let´s go test
+
+#### First, the mocked album service
+
+```javascript
+class AlbumService {
+  albums = [
+    {
+      userId: 1,
+      id: 1,
+      title: "Album 1",
+    },
+    {
+      userId: 1,
+      id: 2,
+      title: "Album 2",
+    },
+    {
+      userId: 1,
+      id: 3,
+      title: "Album 3",
+    },
+  ];
+
+  public async GetAlbums() {
+    return new Promise((resolve) => {
+      console.log("Called mocked GetAlbums");
+      process.nextTick(() => resolve(this.albums)); //Resolving the promise with the mocked list
+    });
+  }
+}
+
+export default new AlbumService();
+```
+
+#### Finally, the album store tests (albumStore.test.ts)
+
+```javascript
+class AlbumService {
+  albums = [
+    {
+      userId: 1,
+      id: 1,
+      title: "Album 1",
+    },
+    {
+      userId: 1,
+      id: 2,
+      title: "Album 2",
+    },
+    {
+      userId: 1,
+      id: 3,
+      title: "Album 3",
+    },
+  ];
+
+  public async GetAlbums() {
+    return new Promise((resolve) => {
+      console.log("Called mocked GetAlbums");
+      process.nextTick(() => resolve(this.albums)); //Devolvendo a promise com a lista simulada
+    });
+  }
+}
+
+export default new AlbumService();
+```
+
+#### Running the tests
+
+```
+npm test
+```
+
+#### Voila!
+
+![Tests results](images/tests01.jpg)

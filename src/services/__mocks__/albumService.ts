@@ -3,24 +3,24 @@ class AlbumService {
     {
       userId: 1,
       id: 1,
-      title: "quidem molestiae enim",
+      title: "Album 1",
     },
     {
       userId: 1,
       id: 2,
-      title: "sunt qui excepturi placeat culpa",
+      title: "Album 2",
     },
     {
       userId: 1,
       id: 3,
-      title: "omnis laborum odio",
+      title: "Album 3",
     },
   ];
 
   public async GetAlbums() {
     return new Promise((resolve) => {
       console.log("Called mocked GetAlbums");
-      process.nextTick(() => resolve(this.albums)); //Devolvendo a promise com a lista simulada
+      process.nextTick(() => resolve(this.albums)); //Resolving the promise with the mocked list
     });
   }
 }
