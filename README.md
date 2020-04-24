@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Researching how to do unit tests of a Mobx store, I came across examples that, although useful, were not exactly what I was looking for, as their stores did not access an http service, as was the case of the project I was working on.
+Researching how to do unit tests of a Mobx store, I came across examples that, although useful, were not exactly what I was looking for, as their stores did not access a http service, as was the case of the project I was working on.
 
 The project stores did not receive instances of services by dependency injection, so it was not possible to inject a mock of the service.
 
@@ -32,7 +32,7 @@ As the project uses Jest, I realized that I could leave Jest in charge of mockin
 
 #### Basic Folder Structure After
 
-Using jest for testing, we create a **test** folder in the same level of the componente we are testing. In our case, the albumStore.ts
+Using jest for testing, we create a **test** folder in the same level of the component we are testing. In our case, the albumStore.ts
 
 For the mock, we create a **mocks** folder in the same level of the component we want to mock. Note: the name of the mock file must be the same of the original file (albumService.ts) being mocked, so jest can undestand and mock during the tests.
 
@@ -161,6 +161,6 @@ npm test
 
 #### Final thoughts
 
-There's more than one way to skin a cat. This is just a simple way to mock a component and there is more that Jest can do. I hope it can help you.
+There's more than one way to skin a cat. This is just a simple way to mock a component and there is a lot more that Jest can do. I hope it can help you.
 
 Keep on!
