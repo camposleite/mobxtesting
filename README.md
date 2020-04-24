@@ -1,5 +1,3 @@
-[TOC]
-
 ## React and Mobx Store Unit Testing and Mocking With Jest
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -14,8 +12,8 @@ As the project uses Jest, I realized that I could leave it in charge of mocking 
 
 #### Tools
 
-- mobx and mobx-react: npm i mobx mobx-react --save-dev
-- jest
+- [mobx](https://mobx.js.org/) and [mobx-react](https://github.com/mobxjs/mobx-react): npm i mobx mobx-react --save-dev
+- [jest](https://jestjs.io/)
 - @types/jest: npm install --save @types/jest
 - http://jsonplaceholder.typicode.com
 
@@ -44,17 +42,16 @@ So the folder structure looks like as following:
        components/
             albumComponent.tsx
        services/
-    		__mocks__/
-    			albumService.ts
-    		albumService.ts
+            __mocks__/
+                albumService.ts
+            albumService.ts
        stores/
-    		__test__/
-    			albumStore.test.ts
+            __test__/
+                albumStore.test.ts
             albumStore.ts
        App.js
        index.js
        ...
-
 
 #### Simple service using Fetch
 
