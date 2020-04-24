@@ -17,7 +17,7 @@ As the project uses Jest, I realized that I could leave Jest in charge of mockin
 - @types/jest: `$ npm install --save @types/jest`
 - http://jsonplaceholder.typicode.com
 
-#### Basic Folder Structure Before
+#### Basic folder structure before
 
     src/
        components/
@@ -30,7 +30,7 @@ As the project uses Jest, I realized that I could leave Jest in charge of mockin
        index.js
        ...
 
-#### Basic Folder Structure After
+#### Basic folder structure after
 
 Using jest for testing, we create a **test** folder in the same level of the component we are testing. In our case, the albumStore.ts
 
