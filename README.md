@@ -1,8 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## React and Mobx Store Unit Testing and Mocking With Jest
 
-In the project directory, you can run:
+Researching how to do unit tests of a Mobx store, I came across examples that, although useful, did not fully serve me, as their stores did not access an http service, as was the case with my project.
 
 ### `npm start`
 
