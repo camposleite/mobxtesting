@@ -1,3 +1,5 @@
+[TOC]
+
 ## React and Mobx Store Unit Testing and Mocking With Jest
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -52,6 +54,7 @@ So the folder structure looks like as following:
        App.js
        index.js
        ...
+
 
 #### Simple service using Fetch
 
@@ -126,34 +129,27 @@ export default new AlbumService();
 #### Finally, the album store tests (albumStore.test.ts)
 
 ```javascript
-class AlbumService {
-  albums = [
-    {
-      userId: 1,
-      id: 1,
-      title: "Album 1",
-    },
-    {
-      userId: 1,
-      id: 2,
-      title: "Album 2",
-    },
-    {
-      userId: 1,
-      id: 3,
-      title: "Album 3",
-    },
-  ];
+//Here we are telling Jest to pick the mocked version when the store make a call to the album service.
+jest.mock("../../services/albumService");
 
-  public async GetAlbums() {
-    return new Promise((resolve) => {
-      console.log("Called mocked GetAlbums");
-      process.nextTick(() => resolve(this.albums)); //Devolvendo a promise com a lista simulada
-    });
-  }
-}
+import AlbumStore from "../albumStore";
 
-export default new AlbumService();
+describe("Album Store", () => {
+  it("should get all albums", async () => {
+    const store = new AlbumStore();
+
+    //Some simple tests
+    expect(store.albums).not.toBeUndefined();
+    expect(store.albums).not.toBeNull();
+    expect(store.albums.length).toBe(0);
+
+    await store.getAlbums();
+
+    expect(store.albums).not.toBeUndefined();
+    expect(store.albums).not.toBeNull();
+    expect(store.albums.length).toBeGreaterThan(0);
+  });
+});
 ```
 
 #### Running the tests
@@ -165,3 +161,9 @@ npm test
 #### Voila!
 
 ![Tests results](images/tests01.jpg)
+
+#### Final thoughts
+
+There's more than one way to skin a cat. This is just a simple way to mock a component and there is more that Jest can do. I hope it can help you.
+
+Keep on!

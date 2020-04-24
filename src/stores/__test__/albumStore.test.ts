@@ -7,6 +7,7 @@ describe("Album Store", () => {
   it("should get all albums", async () => {
     const store = new AlbumStore();
 
+    //Some simple tests
     expect(store.albums).not.toBeUndefined();
     expect(store.albums).not.toBeNull();
     expect(store.albums.length).toBe(0);
