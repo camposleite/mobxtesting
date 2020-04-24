@@ -2,19 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Researching how to do unit tests of a Mobx store, I came across examples that, although useful, did not fully serve me, as their stores did not access an http service, as was the case with my project.
+Researching how to do unit tests of a Mobx store, I came across examples that, although useful, were not exactly what I was looking for, as their stores did not access an http service, as was the case of the project I was working on.
 
-The project stores did not receive instances of services due to dependency injection, so it was not possible to inject a mock of the service.
+The project stores did not receive instances of services by dependency injection, so it was not possible to inject a mock of the service.
 
 #### Enter Jest
 
-As the project uses Jest, I realized that I could leave it in charge of mocking these services. And I found it was quite simple.
+As the project uses Jest, I realized that I could leave Jest in charge of mocking the services. And I found it was quite simple.
 
 #### Tools
 
-- [mobx](https://mobx.js.org/) and [mobx-react](https://github.com/mobxjs/mobx-react): npm i mobx mobx-react --save-dev
+- [mobx](https://mobx.js.org/) and [mobx-react](https://github.com/mobxjs/mobx-react): `$ npm i mobx mobx-react --save-dev`
 - [jest](https://jestjs.io/)
-- @types/jest: npm install --save @types/jest
+- @types/jest: `$ npm install --save @types/jest`
 - http://jsonplaceholder.typicode.com
 
 #### Basic Folder Structure Before
