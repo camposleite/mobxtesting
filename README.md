@@ -1,5 +1,3 @@
-[TOC]
-
 ## React and Mobx Store Unit Testing and Mocking With Jest
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -54,7 +52,6 @@ So the folder structure looks like as following:
        App.js
        index.js
        ...
-
 
 #### Simple service using Fetch
 
