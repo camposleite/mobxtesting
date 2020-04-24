@@ -155,7 +155,7 @@ describe("Album Store", () => {
 npm test
 ```
 
-#### Voila!
+#### Voila! The tests are working and using the mocked version of the service
 
 ![Tests results](images/tests01.jpg)
 
