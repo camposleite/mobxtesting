@@ -1,68 +1,91 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[TOC]
 
 ## React and Mobx Store Unit Testing and Mocking With Jest
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 Researching how to do unit tests of a Mobx store, I came across examples that, although useful, did not fully serve me, as their stores did not access an http service, as was the case with my project.
 
-### `npm start`
+The project stores did not receive instances of services due to dependency injection, so it was not possible to inject a mock of the service.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Enter Jest
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+As the project uses Jest, I realized that I could leave it in charge of mocking these services. And I found it was quite simple.
 
-### `npm test`
+#### Tools
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- mobx and mobx-react: npm i mobx mobx-react --save-dev
+- jest
+- @types/jest: npm install --save @types/jest
 
-### `npm run build`
+#### Basic Folder Structure Before
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    src/
+       components/
+            albumComponent.tsx
+       services/
+            albumService.ts
+       stores/
+            albumStore.ts
+       App.js
+       index.js
+       ...
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Basic Folder Structure After
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Using jest for testing, we create a **test** folder in the same level of the componente we are testing. In our case, the albumStore.ts
 
-### `npm run eject`
+For the mock, we create a **mocks** folder in the same level of the component we want to mock. Note: the name of the mock file must be the same of the original file (albumService.ts) being mocked, so jest can undestand and mock during the tests.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+So the folder structure looks like as following:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    src/
+       components/
+            albumComponent.tsx
+       services/
+    		__mocks__/
+    			albumService.ts
+    		albumService.ts
+       stores/
+    		__test__/
+    			albumStore.test.ts
+            albumStore.ts
+       App.js
+       index.js
+       ...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Simple service using Fetch
 
-## Learn More
+```javascript
+class AlbumService {
+  public async GetAlbums() {
+    let response = await fetch("http://jsonplaceholder.typicode.com/albums");
+    let data = await response.json();
+    return data;
+  }
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+export default new AlbumService();
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Simple Mobx store calling the service
 
-### Code Splitting
+```javascript
+import { action, observable } from "mobx";
+import albumService from "../services/albumService";
+import { AlbumDto } from "../services/dto/albumDto";
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+class AlbumStore {
+  @observable albums: AlbumDto[] = [];
 
-### Analyzing the Bundle Size
+  @action
+  async getAlbums() {
+    const result = await albumService.GetAlbums();
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+    this.albums = result;
+  }
+}
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+export default AlbumStore;
+```
