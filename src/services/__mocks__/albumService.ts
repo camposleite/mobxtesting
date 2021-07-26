@@ -1,3 +1,5 @@
+import AlbumModel from "../../models/albumModel";
+
 class AlbumService {
   albums = [
     {
@@ -17,10 +19,22 @@ class AlbumService {
     },
   ];
 
+  currentAlbum: AlbumModel = new AlbumModel();
+
   public async GetAlbums() {
     return new Promise((resolve) => {
       console.log("Called mocked GetAlbums");
       process.nextTick(() => resolve(this.albums)); //Resolving the promise with the mocked list
+    });
+  }
+
+  public async GetAlbum(id: number) {
+    return new Promise((resolve) => {
+      console.log("Called mocked GetAlbum(id)");
+      this.currentAlbum = new AlbumModel();
+      this.currentAlbum.id = id;
+
+      process.nextTick(() => resolve(this.currentAlbum)); //Resolving the promise with the mocked list
     });
   }
 }

@@ -18,4 +18,19 @@ describe("Album Store", () => {
     expect(store.albums).not.toBeNull();
     expect(store.albums.length).toBeGreaterThan(0);
   });
+
+  it("should get one album", async () => {
+    const store = new AlbumStore();
+
+    //Some simple tests
+    expect(store.albums).not.toBeUndefined();
+    expect(store.albums).not.toBeNull();
+    expect(store.currentAlbum.id).toBeUndefined();
+
+    await store.getAlbum(1);
+
+    expect(store.currentAlbum).not.toBeUndefined();
+    expect(store.currentAlbum).not.toBeNull();
+    expect(store.currentAlbum.id).toBe(1);
+  });
 });
